@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.config.prod.js -p",
-    "start": "webpack-dev-server --hot --inline --config webpack.config.dev.js"
+    "start": "webpack-dev-server --hot --inline --config webpack.config.dev.js",
+    "start:express": "babel-node server.js",
+    "flow": "flow",
+    "flow-typed": "flow-typed"
   },
   "repository": {
     "type": "git",
@@ -18,24 +21,40 @@
   },
   "homepage": "https://github.com/kaminchu/photo-uploader#readme",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.7.1",
     "eslint-loader": "^1.9.0",
+    "eslint-plugin-flowtype": "^2.35.1",
     "eslint-plugin-react": "^7.3.0",
     "extract-text-webpack-plugin": "^3.0.0",
+    "flow-bin": "^0.55.0",
+    "flow-typed": "^2.1.5",
     "html-webpack-plugin": "^2.30.1",
+    "socket.io": "^2.0.3",
     "webpack": "^3.6.0",
-    "webpack-dev-server": "^2.8.2"
+    "webpack-dev-middleware": "^1.12.0",
+    "webpack-dev-server": "^2.8.2",
+    "webpack-hot-middleware": "^2.19.1"
   },
   "dependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "redux-logger": "^3.0.6",
+    "redux-socket.io": "^1.4.0",
+    "redux-thunk": "^2.2.0",
+    "socket.io-client": "^2.0.3"
   }
 }
