@@ -7,7 +7,10 @@ module.exports = {
     ...config.plugins,
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        drop_console: true
+        drop_console: true,
+        dead_code: true,
+        unused: true,
+        warnings: true
       },
     }),
   ]
