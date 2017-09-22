@@ -5,11 +5,13 @@ import configureStore from './store/configureStore';
 import Router from './router';
 
 const store = configureStore();
-export default class Root extends Component {
+
+type Props = any;
+export default class Root extends Component<Props> {
   render() {
     return (
       <Provider store={store}>
-        {() => <Router />}
+        <Router />
       </Provider>
     );
   }

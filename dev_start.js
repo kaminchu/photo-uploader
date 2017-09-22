@@ -1,11 +1,11 @@
+/* global process, __dirname */
 import express from 'express';
 import path from 'path';
-
 
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 
 if (process.env.NODE_ENV !== 'production') {
   const webpack = require('webpack');
@@ -23,18 +23,8 @@ if (process.env.NODE_ENV !== 'production') {
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
-  // クライアントからメッセージを受け取ったら投げ返す
-  socket.on('chat message', function(msg){
-    // 同じクライアントに送信する場合は socket.emit を io.emit に変える
-    socket.emit('chat message', msg);
-  });
-});
-
+const socket = require('./server/socket');
+io.on('connection', socket(io));
 
 console.log(`Served: http://localhost:${port}`);
 http.listen(port, (err) => {

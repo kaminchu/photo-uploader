@@ -2,7 +2,7 @@
 import {combineReducers} from 'redux';
 
 // reducer
-import timelineReducer from './timeline';
+import timeline from './timeline';
 
 // type
 import type {State as TimelineState} from './timeline';
@@ -11,4 +11,4 @@ import type {State as TimelineState} from './timeline';
 export type State = {
   timeline: TimelineState;
 };
-export default combineReducers({timelineReducer});
+export default combineReducers({timeline});

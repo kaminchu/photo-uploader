@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.config.prod.js -p",
-    "start": "webpack-dev-server --hot --inline --config webpack.config.dev.js",
+    "start": "babel-node dev_start.js",
     "start:express": "babel-node server.js",
     "flow": "flow",
     "flow-typed": "flow-typed"

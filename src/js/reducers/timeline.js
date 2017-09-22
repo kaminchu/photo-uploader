@@ -11,5 +11,5 @@ const defaultState = {
 };
 
 export default handleActions({
-  [actions.postPhoto]: (state: State, action: any) => ({...state, message: action.payload.message})
+  [actions.changeMessage]: (state: State, action: any) => ({...state, message: action.payload.message}),
 }, defaultState);
