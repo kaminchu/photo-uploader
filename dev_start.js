@@ -23,7 +23,7 @@ if (process.env.NODE_ENV !== 'production') {
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-const socket = require('./server/socket');
+const socket = require('./dist/server/socket');
 io.on('connection', socket(io));
 
 console.log(`Served: http://localhost:${port}`);

@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.config.prod.js -p",
-    "start": "babel-node dev_start.js",
+    "start": "gulp && babel-node dev_start.js",
     "start:express": "babel-node server.js",
     "flow": "flow",
     "flow-typed": "flow-typed",
+    "gulp": "gulp",
+    "build-storybook": "build-storybook",
     "storybook": "start-storybook -s ./stories/static -p 6006",
-    "build-storybook": "build-storybook"
+
   },
   "repository": {
     "type": "git",
@@ -40,6 +42,8 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "flow-bin": "^0.55.0",
     "flow-typed": "^2.1.5",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
     "html-webpack-plugin": "^2.30.1",
     "socket.io": "^2.0.3",
     "webpack": "^3.6.0",
