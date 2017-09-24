@@ -25,14 +25,17 @@ const baseProps = {
   group: "group",
   name: "name",
   postTime: new Date(),
-  img: "/cat1.jpg",
+  thumbnailUrl: "/cat1.jpg",
+  originalUrl:"/cat1.jpg",
+  isOpenPhotoView: false,
   message: "",
   favoriteCount: 0,
   isFavorite: false,
   canRemove: true,
   onClickFavorite: action("onClickFavorite"),
   onClickRemove: action("onClickRemove"),
-  onClickPhoto: action("onClickPhoto")
+  onClickPhoto: action("onClickPhoto"),
+  onClickClosePhotoView: action("onClickClosePhotoView")
 };
 const messageProps = {
   ...baseProps,
@@ -59,6 +62,11 @@ const disableRemoveProps = {
   canRemove: false
 };
 
+const photoViewProps = {
+  ...baseProps,
+  isOpenPhotoView: true
+};
+
 
 storiesOf('Card', module)
   .addDecorator(Decorator)
@@ -79,6 +87,9 @@ storiesOf('Card', module)
   })
   .add('消せない', () => {
     return <PhotoCard {...disableRemoveProps}/>;
+  })
+  .add('ビュー表示', () => {
+    return <PhotoCard {...photoViewProps}/>;
   });
 
 
@@ -98,6 +109,7 @@ import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import CancelIcon from 'material-ui-icons/Cancel';
 import DeleteIcon from 'material-ui-icons/Delete';
 import _ from 'lodash';
+import Lightbox from 'react-image-lightbox';
 import moment from 'moment';
 
 
@@ -176,16 +188,19 @@ type Props = {
   group: string;
   name: string;
   postTime: Date;
-  img: string;
+  originalUrl: string;
+  thumbnailUrl: string;
+  isOpenPhotoView: boolean;
   message: string;
   favoriteCount: number;
   isFavorite: boolean;
   canRemove: boolean;
-  onClickFavorite: (id) => void;
-  onClickRemove: (id) => void;
-  onClickPhoto: (id) => void;
+  onClickFavorite: (id: number) => void;
+  onClickRemove: (id: number) => void;
+  onClickPhoto: (id: number) => void;
+  onClickClosePhotoView: (id: number) => void;
 };
-class PhotoCard extends Component<Props> {
+export class PhotoCard extends Component<Props> {
   render() {
 
     const {
@@ -193,24 +208,33 @@ class PhotoCard extends Component<Props> {
       group,
       name,
       postTime,
-      img,
+      originalUrl,
+      thumbnailUrl,
+      isOpenPhotoView,
       message,
       favoriteCount,
       isFavorite,
       canRemove,
       onClickFavorite,
       onClickRemove,
-      onClickPhoto
+      onClickPhoto,
+      onClickClosePhotoView
     }=  this.props;
 
     return (
       <div>
+        {isOpenPhotoView &&
+        <Lightbox
+          mainSrc={originalUrl}
+          onCloseRequest={() => onClickClosePhotoView(id)}
+        />
+        }
         <Card className={css(_styles.card)}>
           <div className={css(_styles.photo)}>
             <CardMedia
               onClick={() => onClickPhoto(id)}
               className={css(_styles.media)}
-              image={img}
+              image={thumbnailUrl}
             />
             <div className={css(_styles.overlay)}>
               <div className={css(_styles.postDate, _styles.fontWhite)}>
