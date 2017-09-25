@@ -1,12 +1,16 @@
 // @flow
 import React from 'react';
-
-
 import {storiesOf} from '@storybook/react';
 import {action} from '@storybook/addon-actions';
+
+// component
+import PhotoCard from "../src/js/components/photo_card";
+
+
+
 // Decorator Settings
-import {addDecorator} from '@storybook/react';
 import {StyleSheet, css} from 'aphrodite';
+
 const styles = StyleSheet.create({
   decorator: {
     backgroundColor: "#eeeeee",
@@ -68,7 +72,7 @@ const photoViewProps = {
 };
 
 
-storiesOf('Card', module)
+storiesOf('Photo Card', module)
   .addDecorator(Decorator)
   .add('初期:メッセージなし', () => {
     return <PhotoCard {...baseProps}/>;

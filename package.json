@@ -11,8 +11,7 @@
     "flow-typed": "flow-typed",
     "gulp": "gulp",
     "build-storybook": "build-storybook",
-    "storybook": "start-storybook -s ./stories/static -p 6006",
-
+    "storybook": "start-storybook -s ./stories/static -p 6006"
   },
   "repository": {
     "type": "git",
