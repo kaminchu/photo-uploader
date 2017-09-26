@@ -5,6 +5,7 @@ import moment from 'moment';
 import {StyleSheet, css} from 'aphrodite';
 
 // component
+import Lightbox from 'react-image-lightbox';
 import Card, { CardMedia, CardContent, CardActions } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import Typography from 'material-ui/Typography';
@@ -12,12 +13,11 @@ import red from 'material-ui/colors/red';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import CancelIcon from 'material-ui-icons/Cancel';
-import Lightbox from 'react-image-lightbox';
 
 
 
-type Props = {
-  id: number;
+
+export type Props = {
   group: string;
   name: string;
   postTime: Date;
@@ -28,16 +28,15 @@ type Props = {
   favoriteCount: number;
   isFavorite: boolean;
   canRemove: boolean;
-  onClickFavorite: (id: number) => void;
-  onClickRemove: (id: number) => void;
-  onClickPhoto: (id: number) => void;
-  onClickClosePhotoView: (id: number) => void;
+  onClickRemove: () => void;
+  onClickFavorite: () => void;
+  onClickPhoto: () => void;
+  onClickClosePhotoView: () => void;
 };
 export default class PhotoCard extends Component<Props> {
   render() {
 
     const {
-      id,
       group,
       name,
       postTime,
@@ -59,13 +58,13 @@ export default class PhotoCard extends Component<Props> {
         {isOpenPhotoView &&
         <Lightbox
           mainSrc={originalUrl}
-          onCloseRequest={() => onClickClosePhotoView(id)}
+          onCloseRequest={() => onClickClosePhotoView()}
         />
         }
         <Card className={css(styles.card)}>
           <div className={css(styles.photo)}>
             <CardMedia
-              onClick={() => onClickPhoto(id)}
+              onClick={() => onClickPhoto()}
               className={css(styles.media)}
               image={thumbnailUrl}
             />
@@ -85,14 +84,14 @@ export default class PhotoCard extends Component<Props> {
               </CardContent>
             </div>
             {canRemove &&
-            <IconButton onClick={() => onClickRemove(id)} className={css(styles.removeButton)}>
+            <IconButton onClick={() => onClickRemove()} className={css(styles.removeButton)}>
               <CancelIcon/>
             </IconButton>
             }
           </div>
           <CardActions className={css(styles.cardActions)} disableActionSpacing={true}>
             <div className={css(styles.buttonGroup)}>
-              <IconButton onClick={() => onClickFavorite(id)} >
+              <IconButton onClick={() => onClickFavorite()} >
                 {isFavorite ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
                 {favoriteCount > 0 && favoriteCount}
               </IconButton>

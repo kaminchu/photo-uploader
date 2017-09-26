@@ -9,24 +9,20 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 
-type Props = {
-  photoId: number;
+export type Props = {
   onClickClose: () => void;
-  onClickRemove: (photoId: number) => void;
+  onClickRemove: () => void;
   onClickCancel: () => void;
-  isOpen: boolean;
 }
 export default class RemoveDialog extends Component<Props> {
   render() {
     const {
-      photoId,
       onClickClose,
       onClickRemove,
       onClickCancel,
-      isOpen,
     } = this.props;
     return (
-      <Dialog open={isOpen} onRequestClose={onClickClose}>
+      <Dialog open onRequestClose={onClickClose}>
         <DialogTitle>{"選択した写真を削除しますか?"}</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -37,7 +33,7 @@ export default class RemoveDialog extends Component<Props> {
           <Button onClick={onClickCancel} color="primary">
             キャンセル
           </Button>
-          <Button onClick={() => onClickRemove(photoId)} color="primary">
+          <Button onClick={onClickRemove} color="primary">
             削除
           </Button>
         </DialogActions>

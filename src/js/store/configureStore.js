@@ -8,7 +8,7 @@ import createSocketIoMiddleware from 'redux-socket.io';
 import io from 'socket.io-client';
 const {protocol, host} = location;
 let socket = io(`${protocol}//${host}`);
-let socketIoMiddleware = createSocketIoMiddleware(socket, '');
+let socketIoMiddleware = createSocketIoMiddleware(socket, 'SERVER_');
 
 let dev_tool_func = undefined;
 if (process.env.NODE_ENV !== 'production') {

@@ -7,7 +7,7 @@ import RemoveDialog from "../src/js/components/remove_dialog";
 const baseProps = {
   photoId: 1,
   onClickClose: action("onClickClose"),
-  onClickRemove: action("onClickRemove"),
+  onClickRemove: action("serverRemovePhoto"),
   onClickCancel: action("onClickCancel"),
   isOpen: true
 };

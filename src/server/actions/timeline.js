@@ -6,7 +6,7 @@ const  actions = {
     [TimelineActions.postPhoto]: (action, socket, io) => {
         console.log(action);
         const sender = new ActionSender(socket, io);
-        sender.sendMulticast(TimelineActions.changeMessage.toString(), action.payload)
+        sender.sendMulticast(TimelineActions.changeMessage, action.payload)
     }
 };
 

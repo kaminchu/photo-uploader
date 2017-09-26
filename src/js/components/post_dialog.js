@@ -1,7 +1,6 @@
 // @flow
 import React, {Component} from 'react';
 import _ from 'lodash';
-import moment from 'moment';
 import {StyleSheet, css} from 'aphrodite';
 
 // component
@@ -14,43 +13,38 @@ import AddAPhotoIcon from 'material-ui-icons/AddAPhoto';
 
 const createObjectURL = (window.URL || window.webkitURL).createObjectURL || window.createObjectURL;
 
+export type Props = {
+  imageFile: ?File;
+  message: string;
+  onChangeFile: (file: File) => void;
+  onChangeMessage: (message: string) => void;
+}
+
 export default class PostDialog extends Component<Props> {
-
-  constructor(props) {
-    super(props);
-    // TODO そのうちstoreにする
-    this.state = {
-      imageFiles: [],
-      message: ""
-    }
-  }
-
-
   onChangeFile(e) {
-    this.setState({imageFiles: e.target.files});
+    this.props.changeFile(_.first(e.target.files));
   }
 
   onChangeMessage(e){
-    this.setState({message: e.target.value});
+    this.props.changeMessage(e.target.value);
   }
 
 
   render() {
-    const {imageFiles} = this.state;
+    const {imageFile, message} = this.props;
     return (
       <div>
         <div className={css(styles.messageRoot)}>
           <TextField
-            id="multiline-flexible"
             label="メッセージを書く"
             multiline
             rowsMax="3"
-            value={this.state.message}
+            value={message}
             onChange={this.onChangeMessage.bind(this)}
             margin="normal"
             InputProps={{ placeholder: 'メッセージ' }}
             autoFocus
-            helperText={`${50-this.state.message.length}文字`}
+            helperText={`${50 - message.length}文字`}
             fullWidth
           />
           <Button className={css(styles.sendButton)} fab>
@@ -58,9 +52,9 @@ export default class PostDialog extends Component<Props> {
           </Button>
         </div>
         <div className={css(styles.imagesRoot)}>
-          {imageFiles.length < 1 && <AddAPhotoIcon onClick={() => this.refs.inputFile.click()} className={css(styles.addPhotoIcon)}/>}
+          {!imageFile && <AddAPhotoIcon onClick={() => this.inputText.click()} className={css(styles.addPhotoIcon)}/>}
           {this.renderImages()}
-          <input type="file" ref="inputFile" onChange={this.onChangeFile.bind(this)} accept="image/*" style={{display:"none"}}/>
+          <input type="file" ref={ref => this.inputText = ref} onChange={this.onChangeFile.bind(this)} accept="image/*" style={{display:"none"}}/>
         </div>
       </div>
     );
@@ -68,7 +62,7 @@ export default class PostDialog extends Component<Props> {
 
 
   renderImages() {
-    const {imageFiles} = this.state;
+    const {imageFiles} = this.props;
 
     return _.map(imageFiles, imageFile => {
       const url = createObjectURL(imageFile);

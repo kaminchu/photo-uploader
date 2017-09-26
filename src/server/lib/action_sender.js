@@ -8,10 +8,9 @@ export default class ActionSender{
         this.io = io;
     }
     sendMulticast(type, payload, meta) {
-        console.log(type, payload, meta);
-        this.io.emit('action', {type: type, payload: payload, meta: meta})
+        this.io.emit('action', {type: type.toString(), payload: payload, meta: meta})
     };
     sendUnicast(type, payload, meta) {
-        this.socket.emit('action', {type: type, payload: payload, meta: meta})
+        this.socket.emit('action', {type: type.toString(), payload: payload, meta: meta})
     }
 }

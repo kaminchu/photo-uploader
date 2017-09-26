@@ -36,9 +36,9 @@ const baseProps = {
   favoriteCount: 0,
   isFavorite: false,
   canRemove: true,
-  onClickFavorite: action("onClickFavorite"),
-  onClickRemove: action("onClickRemove"),
-  onClickPhoto: action("onClickPhoto"),
+  onClickFavorite: action("serverDoFavorite"),
+  onClickRemove: action("serverRemovePhoto"),
+  onClickPhoto: action("openPhoto"),
   onClickClosePhotoView: action("onClickClosePhotoView")
 };
 const messageProps = {

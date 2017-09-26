@@ -36,7 +36,7 @@ export default class Photo {
     return this.favoriteUserIds.length;
   }
 
-  isFavorite(): boolean {
-    return _.contains(this.favoriteUserIds, this.createUserId);
+  isFavorite(userId: number): boolean {
+    return _.includes(this.favoriteUserIds, userId);
   }
 }
